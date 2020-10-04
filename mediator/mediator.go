@@ -108,6 +108,15 @@ func IsVideoContainerSuffix(suffix string) bool {
 	}
 }
 
+func HasVideoContainerSuffix(filename string) bool {
+	filenamePart := strings.Split(filename, ".")
+	partCount := len(filenamePart)
+	if partCount == 1 {
+		return false
+	}
+	return IsVideoContainerSuffix(filenamePart[partCount-1])
+}
+
 // DefaultOutputFile 根据输入文件名，生成默认的输出文件名。
 func (v *VideoTranscoder) DefaultOutputFile() string {
 	inputSplit := strings.Split(v.inputFile, ".")
